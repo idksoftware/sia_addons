@@ -96,7 +96,7 @@ namespace SIATray
     public class BackupManager
     {
         private static DriveList driveList = new DriveList();
-        private static FavoritesList favoritesList = new FavoritesList();
+        
         private static DriveBackup currentDB = null;
         private static List<DriveTask> DriveTasks = new List<DriveTask>();
         private static String libraryLocationPath = null;
@@ -296,10 +296,7 @@ namespace SIATray
             set { libraryLocationPath = value; }
         }
 
-        public static FavoritesList FavoritesList
-        {
-            get { return favoritesList; }
-        }
+        
     }
 
     

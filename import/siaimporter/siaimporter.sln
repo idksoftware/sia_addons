@@ -1,11 +1,18 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{2D412AC1-D72D-4D65-B5FF-BC91243AFD9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wizard", "Wizard\Wizard.csproj", "{94955608-38E0-43BE-AE73-0C16012E7445}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAImporter", "SIATray\SIAImporter.csproj", "{66964857-1D80-4D61-9413-26E84941D218}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3147B286-CEEC-440F-87C8-E13FE966D66D} = {3147B286-CEEC-440F-87C8-E13FE966D66D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgressDialog", "ProgressDialog\ProgressDialog.csproj", "{3147B286-CEEC-440F-87C8-E13FE966D66D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +30,10 @@ Global
 		{66964857-1D80-4D61-9413-26E84941D218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66964857-1D80-4D61-9413-26E84941D218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66964857-1D80-4D61-9413-26E84941D218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3147B286-CEEC-440F-87C8-E13FE966D66D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3147B286-CEEC-440F-87C8-E13FE966D66D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3147B286-CEEC-440F-87C8-E13FE966D66D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3147B286-CEEC-440F-87C8-E13FE966D66D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

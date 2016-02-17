@@ -58,7 +58,9 @@ namespace SIATray
         private EDriveOperation driveOperation = EDriveOperation.eNone;
 
         public static List<Form> ProcessList { get { return processList; } }
-        
+
+        public static ImportQueueForm importQueueForm = null;
+
         public MainForm()
         {
             InitializeComponent();
@@ -605,6 +607,15 @@ namespace SIATray
             {
                 return;
             }
+        }
+
+        private void importQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (importQueueForm == null) {
+                importQueueForm = new ImportQueueForm();
+            }
+            importQueueForm.Show();
+            importQueueForm.WindowState = FormWindowState.Normal;
         }
     }
 }

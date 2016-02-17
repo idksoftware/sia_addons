@@ -81,7 +81,13 @@
     <Compile Include="FolderImportForm.Designer.cs">
       <DependentUpon>FolderImportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="OnNewDriveTask.cs" />
+    <Compile Include="ImportQueue.cs" />
+    <Compile Include="ImportQueueForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportQueueForm.Designer.cs">
+      <DependentUpon>ImportQueueForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PropertiesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,7 +116,6 @@
     <Compile Include="DriveForm.Designer.cs">
       <DependentUpon>DriveForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Favorites.cs" />
     <Compile Include="ProcessingBakupForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FolderImportForm.resx">
       <DependentUpon>FolderImportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportQueueForm.resx">
+      <DependentUpon>ImportQueueForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PropertiesForm.resx">
       <DependentUpon>PropertiesForm.cs</DependentUpon>
