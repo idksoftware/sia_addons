@@ -179,6 +179,7 @@
             this.Controls.Add(this.ProcessingLabel);
             this.Name = "ProgressDialog";
             this.Text = "Import";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgressDialog_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

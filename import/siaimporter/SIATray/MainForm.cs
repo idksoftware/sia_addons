@@ -10,7 +10,7 @@ using System.Threading;
 using System.IO;
 using System.Diagnostics;
 using IDK.Gui;
-
+using ProgressDialog;
 
 namespace SIATray
 {
@@ -59,8 +59,8 @@ namespace SIATray
 
         public static List<Form> ProcessList { get { return processList; } }
 
+        
         public static ImportQueueForm importQueueForm = null;
-
         public MainForm()
         {
             InitializeComponent();

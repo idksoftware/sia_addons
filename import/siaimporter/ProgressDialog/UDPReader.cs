@@ -12,10 +12,10 @@ namespace ProgressDialog
     {
         Thread _readThread;
         volatile bool _keepReading;
-        private const int listenPort = 64323;
+        private const int listenPort = 64321;
         //begin Singleton pattern
         static readonly UDPReader instance = new UDPReader();
-
+        
         // Explicit static constructor to tell C# compiler
         // not to mark type as beforefieldinit
         static UDPReader()
@@ -42,7 +42,11 @@ namespace ProgressDialog
         public void Open()
         {
             // Init udp
-            StartReading();
+            if (_keepReading == false)
+            {
+                StartReading();
+            }
+            
         }
         private void StartReading()
         {
@@ -53,26 +57,25 @@ namespace ProgressDialog
                 _readThread.Start();
             }
         }
-       
-        private void StopReading()
+
+        public void Close()
         {
             if (_keepReading)
             {
                 _keepReading = false;
-                _readThread.Join();	//block until exits
                 _readThread = null;
             }
         }
         private void ReadUDP()
         {
-            bool done = false;
+            //bool done = false;
             UdpClient listener = new UdpClient(listenPort);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
             string received_data;
             byte[] receive_byte_array;
             try
             {
-                while (!done)
+                while (_keepReading)
                 {
                     //Console.WriteLine("Waiting for broadcast");
                     // this is the line of code that receives the broadcase message.
@@ -98,21 +101,6 @@ namespace ProgressDialog
             listener.Close();
             return;
 
-            /*
-            int i = 0;
-            while (_keepReading)
-            {
-               
-                Thread.Sleep(1);
-                String SerialIn = "gggggggggg" + i + "\n";
-                DataReceived(SerialIn);
-                Thread.Sleep(1);
-                i++;
-                SerialIn = "Status: " + i + " of 200\n";
-                
-                DataReceived(SerialIn);
-            }
-             */
         }
     }
 }

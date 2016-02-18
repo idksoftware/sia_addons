@@ -15,12 +15,12 @@ namespace ProgressDialog
 {
     public partial class ProgressDialog : Form
     {
-        enum Action {
+        public enum Action {
             Idle,
             Initalisation,
             Analising,
             Importing,
-            Commplete,
+            Complete,
             Canceled,
             Eborted
         }
@@ -38,7 +38,8 @@ namespace ProgressDialog
 
         ArrayList lines = new ArrayList();
 
-        
+        public delegate void StatusEventHandler(Action param);
+        public StatusEventHandler StatusChanged;
 
         string filterString = "";
         bool scrolling = true;
@@ -77,7 +78,8 @@ namespace ProgressDialog
         // shutdown the worker thread when the form closes
         protected override void OnClosed(EventArgs e)
         {
-            
+            UDPReader reader = UDPReader.Instance;
+            reader.Close();
             base.OnClosed(e);
         }
 
@@ -463,7 +465,7 @@ namespace ProgressDialog
                 case Action.Initalisation: return "Initalising";
                 case Action.Analising: return "Analising";
                 case Action.Importing: return "Importing";
-                case Action.Commplete: return "Commplete";
+                case Action.Complete: return "Complete";
             }
             return "Idle";
         }
@@ -474,11 +476,30 @@ namespace ProgressDialog
                 case LaunchCommandLine.Status.Running:
                     break;
                 case LaunchCommandLine.Status.Completed:
+                    if (StatusChanged != null) {
+                        StatusChanged(Action.Complete);
+                    }
+                    DoClose();
                     break;
                 case LaunchCommandLine.Status.Error:
                     break;
             }
         }
+        private void DoClose()
+        {
+            // InvokeRequired required compares the thread ID of the
+            // calling thread to the thread ID of the creating thread.
+            // If these threads are different, it returns true.
+            if (this.IsHandleCreated)
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // close the form on the forms thread
+                    this.Close();
+                });
+            }
+        }
+
 
         private void buttonPause_Click(object sender, EventArgs e)
         {
@@ -505,6 +526,11 @@ namespace ProgressDialog
                 AsynchronousClient.stopCommand();
             }
            
+        }
+
+        private void ProgressDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
         
     }

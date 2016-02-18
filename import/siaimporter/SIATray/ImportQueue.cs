@@ -10,7 +10,7 @@ namespace SIATray
         InProgress,
         Completed,
         Error
-    }
+    };
     class ImportJob {
         String trackingNo;
         DateTime dateTime;
@@ -43,7 +43,9 @@ namespace SIATray
     class ImportQueue : List<ImportJob> {
 
         static readonly ImportQueue instance = new ImportQueue();
-
+        public delegate void EventHandler(ImportStatus param);
+        public EventHandler StatusChanged;
+        private ImportJob currentJob = null;
         static ImportQueue()
         {
             
@@ -53,6 +55,24 @@ namespace SIATray
             get
             {
                 return instance;
+            }
+        }
+
+        public ImportJob CurrentJob { get { return currentJob; } }
+        public void Add(String location, bool subFolders = true) {
+            ImportJob job = new ImportJob(location, subFolders);
+            Add(job);
+            if (StatusChanged != null)
+            {
+                
+                StatusChanged(ImportStatus.Pending);
+            }
+            if (currentJob == null)
+            {
+                currentJob = job;
+                if (StatusChanged != null) {
+                    StatusChanged(ImportStatus.InProgress);
+                }
             }
         }
     }

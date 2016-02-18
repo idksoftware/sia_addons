@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SIATray</RootNamespace>
     <AssemblyName>SIATray</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -41,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,6 +50,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>SIATray.Program</StartupObject>
@@ -199,6 +201,10 @@
     <EmbeddedResource Include="NeedsBackup.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ProgressDialog\ProgressDialog.csproj">
+      <Project>{3147b286-ceec-440f-87c8-e13fe966d66d}</Project>
+      <Name>ProgressDialog</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Wizard\Wizard.csproj">
       <Project>{94955608-38E0-43BE-AE73-0C16012E7445}</Project>
       <Name>Wizard</Name>
@@ -206,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\siagreen.ico" />
+    <Content Include="Resources\inprogress.ico" />
+    <Content Include="Resources\completed.ico" />
+    <Content Include="Resources\pending.ico" />
     <Content Include="siagreen.ico" />
     <Content Include="disks.bmp" />
     <None Include="Resources\sia.ico" />

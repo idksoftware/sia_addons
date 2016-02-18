@@ -76,7 +76,7 @@ namespace ProgressDialog
     /// </summary>
         void LaunchCommand()
         {
-            Process process = new Process();
+            //Process process = new Process();
             try
             {
  
@@ -92,9 +92,10 @@ namespace ProgressDialog
 	            startInfo.WindowStyle = ProcessWindowStyle.Hidden;
 	            //startInfo.Arguments = "add --source-path=\"Z:\\Pictures/Photos/LightRoom backup/temp/DCIM/100D3200\" --events";
                 startInfo.Arguments = "add --source-path=\"C:\\test\" --events";
+                
+                Process process = Process.Start(startInfo);
                 process.EnableRaisingEvents = true;
                 process.Exited += new EventHandler(OnProcessExited);
-                Process.Start(startInfo);
 
                 const int SLEEP_AMOUNT = 100;
                 while (!eventHandled)
@@ -102,14 +103,7 @@ namespace ProgressDialog
                     elapsedTime += SLEEP_AMOUNT;
                    
                     Thread.Sleep(SLEEP_AMOUNT);
-                    if (process.HasExited == true)
-                    {
-                        break;
-                    }
-                }
-                if (StatusChanged != null)
-                {
-                    StatusChanged(Status.Completed);
+               
                 }
 
                 /*

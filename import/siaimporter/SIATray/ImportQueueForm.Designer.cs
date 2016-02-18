@@ -34,6 +34,9 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
+            this.buttonImportFromFolder = new System.Windows.Forms.Button();
+            this.buttonImportFromDrive = new System.Windows.Forms.Button();
+            this.buttonClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // listView
@@ -48,10 +51,11 @@
             this.columnHeader4});
             this.listView.Location = new System.Drawing.Point(12, 46);
             this.listView.Name = "listView";
-            this.listView.Size = new System.Drawing.Size(526, 223);
+            this.listView.Size = new System.Drawing.Size(526, 258);
             this.listView.TabIndex = 0;
             this.listView.UseCompatibleStateImageBehavior = false;
             this.listView.View = System.Windows.Forms.View.Details;
+            this.listView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_MouseDoubleClick);
             // 
             // columnHeader1
             // 
@@ -84,11 +88,44 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "View and Track your Imports";
             // 
+            // buttonImportFromFolder
+            // 
+            this.buttonImportFromFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImportFromFolder.Location = new System.Drawing.Point(12, 310);
+            this.buttonImportFromFolder.Name = "buttonImportFromFolder";
+            this.buttonImportFromFolder.Size = new System.Drawing.Size(104, 23);
+            this.buttonImportFromFolder.TabIndex = 42;
+            this.buttonImportFromFolder.Text = "&Import from folder";
+            this.buttonImportFromFolder.UseVisualStyleBackColor = true;
+            // 
+            // buttonImportFromDrive
+            // 
+            this.buttonImportFromDrive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonImportFromDrive.Location = new System.Drawing.Point(12, 339);
+            this.buttonImportFromDrive.Name = "buttonImportFromDrive";
+            this.buttonImportFromDrive.Size = new System.Drawing.Size(104, 23);
+            this.buttonImportFromDrive.TabIndex = 43;
+            this.buttonImportFromDrive.Text = "&Import from drive";
+            this.buttonImportFromDrive.UseVisualStyleBackColor = true;
+            // 
+            // buttonClose
+            // 
+            this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.Location = new System.Drawing.Point(465, 339);
+            this.buttonClose.Name = "buttonClose";
+            this.buttonClose.Size = new System.Drawing.Size(73, 23);
+            this.buttonClose.TabIndex = 44;
+            this.buttonClose.Text = "&Close";
+            this.buttonClose.UseVisualStyleBackColor = true;
+            // 
             // ImportQueueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 339);
+            this.ClientSize = new System.Drawing.Size(550, 374);
+            this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.buttonImportFromDrive);
+            this.Controls.Add(this.buttonImportFromFolder);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listView);
             this.MinimizeBox = false;
@@ -108,5 +145,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button buttonImportFromFolder;
+        private System.Windows.Forms.Button buttonImportFromDrive;
+        private System.Windows.Forms.Button buttonClose;
     }
 }

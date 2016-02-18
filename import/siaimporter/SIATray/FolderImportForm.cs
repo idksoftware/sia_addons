@@ -16,7 +16,7 @@ namespace SIATray
         {
             InitializeComponent();
         }
-
+        
         private void buttonBrowse_Click(object sender, EventArgs e)
         {
             DialogResult result = this.importSourceBrowserDialog.ShowDialog();
@@ -33,6 +33,12 @@ namespace SIATray
             
 
 
+        }
+
+        private void buttonOk_Click(object sender, EventArgs e)
+        {
+            ImportQueue.Instance.Add(this.importFolder.Text, this.checkBoxSubFolders.Checked);
+            
         }
     }
 }
