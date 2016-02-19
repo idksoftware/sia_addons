@@ -21,6 +21,10 @@ namespace SIATray
         static DriveBackup driveBackup = null;
         private BackupManager backupManager;
         private static List<Form> processList = new List<Form>();
+        public static ProgressDialog.ProgressDialog progressDialog = null;
+        bool progressDialogOpen = false;
+
+        
 
         enum EDriveOperation
         {
@@ -106,7 +110,10 @@ namespace SIATray
             driveDetector.DeviceArrived += new DriveDetectorEventHandler(OnDriveArrived);
             driveDetector.DeviceRemoved += new DriveDetectorEventHandler(OnDriveRemoved);
             driveDetector.QueryRemove += new DriveDetectorEventHandler(OnQueryRemove);
-           
+
+            ImportQueue importQueue = ImportQueue.Instance;
+            importQueue.StatusChanged += OnStatusChanged;
+            importQueue.Start();
         }
 
         // Called by DriveDetector when removable device in inserted 
@@ -521,6 +528,52 @@ namespace SIATray
                 }
             });
         }
+        private void OpenProgressDialog()
+        {
+            if (progressDialogOpen == false)
+            {
+                if (progressDialog != null)
+                {
+                    progressDialog = null;
+                }
+            }
+            if (progressDialog == null)
+            {
+                progressDialog = new ProgressDialog.ProgressDialog();
+                progressDialog.StatusChanged += OnProgressDialogStatusChanged;
+            }
+            progressDialog.Show();
+            progressDialogOpen = true;
+        }
+
+        void OnProgressDialogStatusChanged(ProgressDialog.ProgressDialog.Action action)
+        {
+            if (action == ProgressDialog.ProgressDialog.Action.Complete)
+            {
+                progressDialogOpen = false;
+            }   
+        }
+
+        void OnStatusChanged(ImportStatus param)
+        {
+            if (param == ImportStatus.InProgress)
+            {
+                ImportQueue importQueue = ImportQueue.Instance;
+                ImportJob job = importQueue.CurrentJob;
+                if (this.IsHandleCreated)
+                {
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        // close the form on the forms thread
+                        OpenProgressDialog();
+                    });
+                }
+
+                
+                return;
+            }
+            
+        }
 
         #region Setup
 
@@ -534,15 +587,15 @@ namespace SIATray
                 }
                 else
                 {
-                    if ((MessageBox.Show("Flash Memory Manager settup Wizard did not complete setting up Flash Memory Manager 1.0.\r Do you wish to re-start the setup Wizard?",
-                                        "Flash Memory Manager 1.0", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)) == DialogResult.Yes)
+                    if ((MessageBox.Show("SIA Import settup Wizard did not complete setting up SIA Import 1.0.\r Do you wish to re-start the setup Wizard?",
+                                        "SIA Import 1.0", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)) == DialogResult.Yes)
                     {
                         continue;
                     }
                     else
                     {
-                        MessageBox.Show("Flash Memory Manager connot continue, exiting Bedtime 1.0\rRe-starting Flash Memory Manager will also re-start the setup Wizard, thus enabling you to complete Flash Memory Manager setup at another time",
-                                        "Flash Memory Manager 1.0", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        MessageBox.Show("SIA Import connot continue, exiting Bedtime 1.0\rRe-starting SIA Import will also re-start the setup Wizard, thus enabling you to complete SIA Import setup at another time",
+                                        "SIA Import 1.0", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         Environment.Exit(-1);
                     }
                 }

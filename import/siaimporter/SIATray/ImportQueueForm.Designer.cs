@@ -97,6 +97,7 @@
             this.buttonImportFromFolder.TabIndex = 42;
             this.buttonImportFromFolder.Text = "&Import from folder";
             this.buttonImportFromFolder.UseVisualStyleBackColor = true;
+            this.buttonImportFromFolder.Click += new System.EventHandler(this.buttonImportFromFolder_Click);
             // 
             // buttonImportFromDrive
             // 
@@ -107,16 +108,19 @@
             this.buttonImportFromDrive.TabIndex = 43;
             this.buttonImportFromDrive.Text = "&Import from drive";
             this.buttonImportFromDrive.UseVisualStyleBackColor = true;
+            this.buttonImportFromDrive.Click += new System.EventHandler(this.buttonImportFromDrive_Click);
             // 
             // buttonClose
             // 
             this.buttonClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonClose.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonClose.Location = new System.Drawing.Point(465, 339);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(73, 23);
             this.buttonClose.TabIndex = 44;
             this.buttonClose.Text = "&Close";
             this.buttonClose.UseVisualStyleBackColor = true;
+            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
             // ImportQueueForm
             // 

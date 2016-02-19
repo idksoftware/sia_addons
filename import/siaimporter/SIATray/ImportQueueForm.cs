@@ -14,6 +14,7 @@ namespace SIATray
         ImageList imageListSmall = new ImageList();
         public static ProgressDialog.ProgressDialog progressDialog = null;
         bool progressDialogOpen = false;
+      
         public ImportQueueForm()
         {
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace SIATray
 
         private void ImportQueueForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainForm.importQueueForm = null;
+           
         }
         
         void OnStatusChanged(ImportStatus param) {
@@ -60,16 +61,17 @@ namespace SIATray
             }
             if (param == ImportStatus.InProgress)
             {
-                //readQueue();
+                
                 ImportQueue iq = ImportQueue.Instance;
-                ListViewItem item = listView.FindItemWithText(iq.CurrentJob.TrackingNo);
-                item.ImageIndex = 1;
+                //ListViewItem item = listView.FindItemWithText(iq.CurrentJob.TrackingNo);
+                //item.ImageIndex = 1;
 
             }
         }
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
+            /*
             if (progressDialogOpen == false)
             {
                 if (progressDialog != null)
@@ -85,8 +87,10 @@ namespace SIATray
             progressDialog.Show();
             progressDialog.WindowState = FormWindowState.Normal;
             progressDialogOpen = true;
+             */
         }
 
+        /*
         void OnProgressDialogStatusChanged(ProgressDialog.ProgressDialog.Action action)
         {
             if (action == ProgressDialog.ProgressDialog.Action.Complete) 
@@ -94,5 +98,33 @@ namespace SIATray
                 progressDialogOpen = false;
             }
         }
+        */
+        private void buttonImportFromFolder_Click(object sender, EventArgs e)
+        {
+            FolderImportForm form = new FolderImportForm();
+            DialogResult res = form.ShowDialog();
+            if (res == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void buttonImportFromDrive_Click(object sender, EventArgs e)
+        {
+            DriveForm form = new DriveForm();
+            DialogResult res = form.ShowDialog();
+            if (res == DialogResult.Cancel)
+            {
+                return;
+            }
+        }
+
+        private void buttonClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            MainForm.importQueueForm = null;
+        }
+
+        
     }
 }
