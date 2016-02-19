@@ -9,7 +9,7 @@ namespace ProgressDialog
 {
     // add --source-path="Z:\Pictures/Photos/LightRoom backup/temp/DCIM/100D3200" --events
     // C:\development\sia\SimpleArchive\Release
-    class LaunchCommandLine
+    public class LaunchCommandLine
     {
         public enum Status
         {
