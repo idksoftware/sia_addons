@@ -137,6 +137,10 @@ namespace SIATray
 
         void OnProcessStatusChanged(LaunchCommandLine.Status param)
         {
+            if (currentJob == null)
+            {
+                return;
+            }
             switch(param) {
             case LaunchCommandLine.Status.Completed:
                 currentJob.ImportStatus = ImportStatus.Completed;
@@ -147,6 +151,17 @@ namespace SIATray
             }
             currentJob = null;
         }
-       
+
+        public ImportJob FindJob(String trackingNo)
+        {
+            foreach (ImportJob job in this)
+            {
+                if (job.TrackingNo.CompareTo(trackingNo) == 0) 
+                {
+                    return job;
+                }
+            }
+            return null;
+        }
     }
 }

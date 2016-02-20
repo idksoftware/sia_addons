@@ -14,7 +14,7 @@ namespace SIATray
         ImageList imageListSmall = new ImageList();
         public static ProgressDialog.ProgressDialog progressDialog = null;
         bool progressDialogOpen = false;
-      
+        int lastReadItems = 0;
         public ImportQueueForm()
         {
             InitializeComponent();
@@ -31,42 +31,60 @@ namespace SIATray
             listView.SmallImageList = imageListSmall;
             readQueue();
             iq.StatusChanged += OnStatusChanged;
+            timerUpdate.Start();
         }
 
-        public void readQueue()
+
+        int GetStatusID(ImportStatus status)
+        {
+            switch(status) {
+                case  ImportStatus.Pending:
+                    return 0;
+                case  ImportStatus.InProgress:
+                    return 1;
+                case  ImportStatus.Completed:
+                    return 2;
+                default:
+                    return 2;
+            }
+       
+        }
+        public int readQueue()
         {
             listView.Items.Clear();
 
             foreach (ImportJob ij in ImportQueue.Instance)
             {
-                ListViewItem lvi = new ListViewItem(ij.TrackingNo, 0);
+                ListViewItem lvi = new ListViewItem(ij.TrackingNo, GetStatusID(ij.ImportStatus));
                 lvi.SubItems.Add(ij.DateTime.ToShortDateString());
                 lvi.SubItems.Add(ij.Location);
                 lvi.SubItems.Add(ij.SubFolders.ToString());
                 lvi.SubItems.Add(ij.ImportStatus.ToString());
                 listView.Items.Add(lvi);
             }
+            return listView.Items.Count;
         }
 
+        public int updateStatus()
+        {
+            ImportQueue importQueue = ImportQueue.Instance;
+            foreach (ListViewItem lvi in listView.Items)
+            {
+                ImportJob job = importQueue.FindJob(lvi.Text);
+                if (job != null)
+                {
+                    lvi.ImageIndex = GetStatusID(job.ImportStatus);
+                }
+            }
+            return listView.Items.Count;
+        }
         private void ImportQueueForm_FormClosing(object sender, FormClosingEventArgs e)
         {
            
         }
         
         void OnStatusChanged(ImportStatus param) {
-            if (param == ImportStatus.Pending)
-            {
-                readQueue();
-                return;
-            }
-            if (param == ImportStatus.InProgress)
-            {
-                
-                ImportQueue iq = ImportQueue.Instance;
-                //ListViewItem item = listView.FindItemWithText(iq.CurrentJob.TrackingNo);
-                //item.ImageIndex = 1;
-
-            }
+            updateStatus();
         }
 
         private void listView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -123,6 +141,16 @@ namespace SIATray
         {
             this.Close();
             MainForm.importQueueForm = null;
+        }
+
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            ImportQueue importQueue = ImportQueue.Instance;
+            if (importQueue.Count != lastReadItems)
+            {
+                lastReadItems = readQueue();
+            }
+            updateStatus();
         }
 
         

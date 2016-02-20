@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -37,6 +38,7 @@
             this.buttonImportFromFolder = new System.Windows.Forms.Button();
             this.buttonImportFromDrive = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // listView
@@ -122,6 +124,10 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // timerUpdate
+            // 
+            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
+            // 
             // ImportQueueForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -152,5 +158,6 @@
         private System.Windows.Forms.Button buttonImportFromFolder;
         private System.Windows.Forms.Button buttonImportFromDrive;
         private System.Windows.Forms.Button buttonClose;
+        private System.Windows.Forms.Timer timerUpdate;
     }
 }
