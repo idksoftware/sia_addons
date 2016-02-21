@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Document>
+    <Identity>
+        <Number>176</Number>
+        <Revision>1</Revision>
+        <Label>DSC_8268</Label>
+        <OrginalRaw>DSC_8268.NEF</OrginalRaw>
+        <OrginalPic>DSC_8268.JPG</OrginalPic>
+    </Identity>
+    <Jounal>
+        <TimesBackedUp>0</TimesBackedUp>
+        <InPrimaryStorage>Yes</InPrimaryStorage>
+        <CheckedStatus>No</CheckedStatus>
+        <Publishable>Yes</Publishable>
+    </Jounal>
+    <File>
+        <OriginalFile>DSC_8268.NEF</OriginalFile>
+        <LastModified>06/04/2010 16:51:54</LastModified>
+        <Size>0</Size>
+        <Crc>1692988880</Crc>
+        <Md5>57b0282fcc75ded41e2b6b2f752ed321</Md5>
+        <ArchiveName>IMG000000B0.NEF</ArchiveName>
+        <UUID>45b51bd2-827d-4c28-bd17-d33a19f4b0cc</UUID>
+    </File><!--EXIF GPS Section--><AssetProperties>
+        <Caption/>
+        <Category/>
+        <HardCopyLocation/>
+        <Language/>
+        <Type/>
+        <UserComment><![CDATA[
+  Hi There 
+  ]]></UserComment>
+        <Editor/>
+        <Tags>
+            <Tag>Climbing</Tag>
+            <Tag>Sport</Tag>
+        </Tags>
+        <Rating/>
+    </AssetProperties><!--Media Properties Section--><MediaProperties>
+        <Width/>
+        <Height/>
+        <DateTime/>
+        <Orientation/>
+        <XResolution/>
+        <YResolution/>
+        <ResolutionUnit/>
+        <ColorSpace/>
+        <Compression/>
+    </MediaProperties><!--Camera Properties Section--><CameraProperties>
+        <Maker>Canon</Maker>
+        <Model>Canon EOS 60D</Model>
+        <ExifVersion>2.30</ExifVersion>
+        <F-Number>F8</F-Number>
+        <ExposureProgram>Manual exposure</ExposureProgram>
+        <ISOSpeedRatings/>
+        <ExposureBias>0 EV</ExposureBias>
+        <DateTimeDigitized>30/06/2011 09:13:07</DateTimeDigitized>
+        <ComponentsConfiguration>YCbCr</ComponentsConfiguration>
+        <ExposureTime>1/30 sec</ExposureTime>
+        <WhiteBalance>Manual white balance</WhiteBalance>
+        <MeteringMode>Multi-segment</MeteringMode>
+        <Aperture>F8</Aperture>
+        <ExposureBias>0 EV</ExposureBias>
+        <MeteringMode>Multi-segment</MeteringMode>
+        <Flash>Flash did not fire, auto</Flash>
+        <FocalLength>50.0 mm</FocalLength>
+        <FlashPixVersion>1.00</FlashPixVersion>
+        <LightSource/>
+        <SensingMethod/>
+        <FileSource/>
+        <SceneType/>
+    </CameraProperties><!--EXIF GPS Section--><Gps>
+        <GPSVersionID/>
+        <GPSLatitudeRef/>
+        <GPSLatitude/>
+        <GPSLongitudeRef/>
+        <GPSLongitude/>
+        <GPSTimeStamp/>
+        <GPSMapDatum/>
+    </Gps><!--Copyright Section--><CopyrightProperties>
+        <CopyRight/>
+        <UsageRights/>
+        <CopyRightURL/>
+    </CopyrightProperties>
+</Document>

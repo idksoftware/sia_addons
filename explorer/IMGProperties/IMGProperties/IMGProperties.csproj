@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4C088FFF-CEB8-4441-BA23-37458549B4A7}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>IMGProperties</RootNamespace>
+    <AssemblyName>IMGProperties</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Calendar.DayView, Version=1.0.3596.33169, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\calendar_src\DayView\bin\Debug\Calendar.DayView.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CameraChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CameraChangeForm.Designer.cs">
+      <DependentUpon>CameraChangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeDetailsForm.Designer.cs">
+      <DependentUpon>ChangeDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeKeywordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeKeywordForm.Designer.cs">
+      <DependentUpon>ChangeKeywordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KeywordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KeywordForm.Designer.cs">
+      <DependentUpon>KeywordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TagForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TagForm.Designer.cs">
+      <DependentUpon>TagForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeTitleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeTitleForm.Designer.cs">
+      <DependentUpon>ChangeTitleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XMLPropertiesReader.cs" />
+    <Compile Include="ExifContainer.cs" />
+    <Compile Include="ChangeTagForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangeTagForm.Designer.cs">
+      <DependentUpon>ChangeTagForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="XMLPropertiesWriter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <Guid>{F935DC20-1CF0-11D0-ADB9-00C04FD58A0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="imgarchive.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CameraChangeForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CameraChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeDetailsForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeKeywordForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeKeywordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KeywordForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>KeywordForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TagForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>TagForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangeTagForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeTagForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spacer.bmp" />
+    <EmbeddedResource Include="ChangeTitleForm.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeTitleForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
