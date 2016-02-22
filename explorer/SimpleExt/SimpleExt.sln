@@ -1,0 +1,43 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimpleExt", "SimpleExt.vcxproj", "{B5197CD4-4D08-165D-1A0B-818F68FAA974}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release MinDependency|Win32 = Release MinDependency|Win32
+		Release MinDependency|x64 = Release MinDependency|x64
+		Release MinSize|Win32 = Release MinSize|Win32
+		Release MinSize|x64 = Release MinSize|x64
+		Unicode Debug|Win32 = Unicode Debug|Win32
+		Unicode Debug|x64 = Unicode Debug|x64
+		Unicode Release MinDependency|Win32 = Unicode Release MinDependency|Win32
+		Unicode Release MinDependency|x64 = Unicode Release MinDependency|x64
+		Unicode Release MinSize|Win32 = Unicode Release MinSize|Win32
+		Unicode Release MinSize|x64 = Unicode Release MinSize|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Debug|x64.ActiveCfg = Debug|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Debug|x64.Build.0 = Debug|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinDependency|Win32.ActiveCfg = Release MinDependency|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinDependency|x64.ActiveCfg = Release MinDependency|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinDependency|x64.Build.0 = Release MinDependency|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinSize|Win32.ActiveCfg = Release MinSize|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinSize|x64.ActiveCfg = Release MinSize|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Release MinSize|x64.Build.0 = Release MinSize|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Debug|Win32.ActiveCfg = Unicode Debug|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Debug|x64.ActiveCfg = Unicode Debug|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Debug|x64.Build.0 = Unicode Debug|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinDependency|Win32.ActiveCfg = Unicode Release MinDependency|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinDependency|x64.ActiveCfg = Unicode Release MinDependency|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinDependency|x64.Build.0 = Unicode Release MinDependency|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinSize|Win32.ActiveCfg = Unicode Release MinSize|Win32
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinSize|x64.ActiveCfg = Unicode Release MinSize|x64
+		{B5197CD4-4D08-165D-1A0B-818F68FAA974}.Unicode Release MinSize|x64.Build.0 = Unicode Release MinSize|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
