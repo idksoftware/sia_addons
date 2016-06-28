@@ -21,9 +21,7 @@ public class SIAWebAdd {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    	
-    	
-    	
+    
         int c = 0;
     	Getopt opts = new Getopt(args, "p");
     	while ((c = opts.getopt()) != -1)
