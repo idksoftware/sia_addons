@@ -7,7 +7,7 @@ import idk.config.ConfigReader;
 //import idk.imgarchive.base.imagesets.ImageSetManager;
 import idk.imgarchive.base.log4j.Log;
 import idk.imgarchive.base.log4j.Log4JLogger;
-
+import idk.imgarchive.base.workspacemanager.Workspace;
 
 import java.io.File;
 import java.io.IOException;
@@ -95,7 +95,23 @@ public class SIAWebAdd {
 	        // raw and picture files
 	     	// are handled.
 	        String errorMessage = null;
-	 		
+	        final Workspace workspace = new Workspace(Path);
+			try {
+				if (workspace.Init() == false) {
+					errorMessage = "Cannot initalise workspace";
+					Log.fatal(errorMessage);
+					consoleOut(errorMessage);
+					return;
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (final RuntimeException e) {
+				errorMessage = "Runtime exception";
+				Log.fatal(errorMessage);
+				consoleOut(errorMessage);
+				return;
+			}
 	 		
 	 	}
         finally
