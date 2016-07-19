@@ -1,0 +1,87 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#Button {
+    
+  
+    -fx-background-color: #336699;
+    
+    /*-fx-font-weight: bold;*/
+    /*-fx-font-size: 1.1em;*/
+    -fx-text-fill: white;
+}
+#Button:hover { 
+   	-fx-text-fill: gray;
+}
+#Button:pressed {
+    
+    
+}
+#Button Text {
+    -fx-fill: white;
+    -fx-effect: dropshadow( gaussian , #a30000 , 0,0,0,2 );
+}
+
+#import-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768); 
+        
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#export-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#cc3300, #944f38),
+        linear-gradient(#ad421f, #8f523d),
+        linear-gradient(#ad421f, #80594d); 
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#search-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#26d926, #4db34d),
+        linear-gradient(#40bf40, #4db34d),
+        linear-gradient(#4db34d, #46b946); 
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 5 5 5 5;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#view-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#9e9e2e, #7a7a52),
+        linear-gradient(#8f8f3d, #858547),
+        linear-gradient(#cccc00, #999933); 
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+#metadata-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#26d926, #4db34d),
+        linear-gradient(#40bf40, #4db34d),
+        linear-gradient(#4db34d, #46b946); 
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 5 5 5 5;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
