@@ -1,6 +1,4 @@
-package app;
-
-
+package SIABrowser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,38 +11,41 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
-import javafx.application.Application;
+import javafx.beans.binding.Bindings;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TitledPane;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
+import testfx.ImageScaler;
+import testfx.ImageGallery.SIAImage;
 
-public class ImageGallery extends Application {
-
-    Stage stage;
-
-    private Label createCaptionedImage(ImageView imageView, String caption) {
+public class ImageGalleryPane extends ScrollPane {
+	
+	Stage stage;
+	
+	private Label createCaptionedImage(ImageView imageView, String caption) {
         Label labeledImage = new Label(caption);
 
         labeledImage.setFont(Font.font("Segoe UI", FontPosture.REGULAR, 15));
-        labeledImage.setStyle("-fx-background-color: cornsilk");
+        labeledImage.setStyle("-fx-background-color: white");
         labeledImage.setPadding(new Insets(0, 0, 5, 0));
         labeledImage.setGraphic(
                 imageView
@@ -85,18 +86,24 @@ public class ImageGallery extends Application {
     }
     */
     
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        stage = primaryStage;
-        ScrollPane root = new ScrollPane();
+    public ImageGalleryPane(Stage stage, String path) {
+    
         TilePane tile = new TilePane();
+        this.stage = stage;
         
-        root.setStyle("-fx-background-color: DAE6F3;");
+        setStyle("-fx-background-color: DAE6F3;");
         tile.setPadding(new Insets(15, 15, 15, 15));
         tile.setHgap(15);
 
-        String path = "C:\\Users\\cn012540\\Documents\\SIA Workspace\\2016\\2016-01-28";
+        //String path = "C:\\Users\\cn012540\\Documents\\SIA Workspace\\2016\\2016-01-28";
 
+        ContextMenu contextMenu = new ContextMenu();
+        MenuItem previewItem = new MenuItem("Preview");
+        MenuItem openItem = new MenuItem("Open");
+        MenuItem propertiesItem = new MenuItem("Properties");
+        contextMenu.getItems().addAll(previewItem, openItem, propertiesItem);
+        
+        
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
 
@@ -108,23 +115,60 @@ public class ImageGallery extends Application {
                 imageView = createImageView(file);
                 
                 Label label = createCaptionedImage(imageView, file.getName());
-                //tile.getChildren().addAll(imageView);
+                
+                
+                label.setContextMenu(contextMenu);
+                
+                label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+
+                        if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+
+                            if(mouseEvent.getClickCount() == 2){
+                                try {
+                                    BorderPane borderPane = new BorderPane();
+                                    ImageView imageView = new ImageView();
+                                    Image image = new Image(new FileInputStream(file));
+                                    imageView.setImage(image);
+                                    imageView.setStyle("-fx-background-color: BLACK");
+                                    imageView.setFitHeight(stage.getHeight() - 10);
+                                    imageView.setPreserveRatio(true);
+                                    imageView.setSmooth(true);
+                                    imageView.setCache(true);
+                                    borderPane.setCenter(imageView);
+                                    borderPane.setStyle("-fx-background-color: BLACK");
+                                    Stage newStage = new Stage();
+                                    newStage.setWidth(stage.getWidth());
+                                    newStage.setHeight(stage.getHeight());
+                                    newStage.setTitle(file.getName());
+                                    Scene scene = new Scene(borderPane,Color.BLACK);
+                                    newStage.setScene(scene);
+                                    newStage.show();
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        }
+                    }
+                    
+                });
+
+            
+                
+                
                 tile.getChildren().addAll(label);
         }
 
 
-        root.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Horizontal
-        root.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
-        root.setFitToWidth(true);
-        root.setContent(tile);
+        setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // Horizontal
+        setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Vertical scroll bar
+        setFitToWidth(true);
+        setContent(tile);
 
-        primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-        primaryStage.setHeight(Screen.getPrimary().getVisualBounds()
-                .getHeight());
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
+        //addGlowOnMouseOver(tile);
     }
     
     int imageSize = 150;
@@ -138,7 +182,7 @@ public class ImageGallery extends Application {
         ImageView imageView = null;
         try {
             SIAImage dim = getImageDimension(imageFile);
-            //ImageScaler imageScaler = new ImageScaler(imageFile.getName());
+            ImageScaler imageScaler = new ImageScaler(imageFile.getName());
             
             //imageScaler.saveScaledImage(file, imageType);
             Image image;
@@ -155,11 +199,9 @@ public class ImageGallery extends Application {
                 imageView.setFitHeight(imageSize);
                 
             }
+            
             //final Image image = new Image(new FileInputStream(imageFile), imageSize, 0, true, true);
             System.out.println("h:" + image.getHeight() + "w:" + image.getWidth());
-            imageView = new ImageView(image);
-            imageView.setFitWidth(imageSize);
-            
             
             imageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
@@ -204,6 +246,15 @@ public class ImageGallery extends Application {
         return imageView;
     }
     
+    private void addGlowOnMouseOver(Node node) {
+        Glow glow = new Glow();
+        DropShadow shadow = new DropShadow(20, Color.GOLD);
+        glow.setInput(shadow);
+
+        node.setOnMousePressed(event -> node.setEffect(null));
+        node.setOnMouseEntered(event -> node.setEffect(glow));
+        node.setOnMouseExited(event -> node.setEffect(null));
+    }
     /**
      * Gets image dimensions for given file 
      * @param imgFile image file
@@ -211,7 +262,7 @@ public class ImageGallery extends Application {
      * @throws IOException if the file is not a known image
      */
     
-    private class SIAImage {
+    public class SIAImage {
     	public int x;
     	public int y;
     	
@@ -245,12 +296,4 @@ public class ImageGallery extends Application {
       throw new IOException("Not a known image file: " + imgFile.getAbsolutePath());
     }
 
-	
-    public static void main(String[] args) {
-        launch(args);
-    }
-
 }
-
-
-

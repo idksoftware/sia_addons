@@ -1,9 +1,12 @@
-package app;
+package testfx;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,11 +27,34 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Gridpane extends Application {
-
+/*
+	public class TopicItem {
+		public String getProperty() {
+			return property;
+		}
+		
+		public void setProperty(String property) {
+			this.property = property;
+		}
+		
+		public int getPos() {
+			return pos;
+		}
+		
+		private String property;
+		private int pos;
+		
+		public TopicItem(int pos, String property) {
+			this.property = property;
+			this.pos = pos;
+		}
+	}
 	
 	public class TopicPane extends GridPane {
 		ArrayList<Button> editButtonList = new ArrayList<Button>();
+		Map<String, TopicItem> properties = new HashMap<String, TopicItem>();
 		boolean editingOn = false;
+		boolean hasChanged = false;
 		String imageName;
 		
 		int curInd = 1;
@@ -38,6 +64,7 @@ public class Gridpane extends Application {
 	        setHgap(5);
 	        setVgap(5);
 	        setPadding(new Insets(15, 15, 15, 15));
+	       
 		}
 		
 		public void setImageName(String imageName) {
@@ -51,10 +78,15 @@ public class Gridpane extends Application {
 		}
 		
 		public void add(String labelText, String propText, boolean enableEditing) {
+			
+			properties.put(labelText, new TopicItem(curInd, propText));
 			Label label = new Label(labelText + ":");
 	        add(label, 0, curInd);
 	        Label prop = new Label(propText);
+	        
+	        
 	        add(prop, 1, curInd);
+	        
 	        if (enableEditing) {
 		        Button btn = new Button("");
 		        editButtonList.add(btn);
@@ -65,13 +97,26 @@ public class Gridpane extends Application {
 	
 		            @Override
 		            public void handle(ActionEvent e) {
-		            	final InputDialog inputDialog = new InputDialog("gggg", labelText);
+		            	TopicItem topicItem = null;
+		            	if(properties.containsKey(labelText)) {
+	            			topicItem = properties.get(labelText);
+	            			System.out.println("Found " + topicItem.getProperty() + " " + labelText + " \n"); 
+	            		}
+		            	final InputDialog inputDialog = new InputDialog(imageName, labelText, topicItem.getProperty());
+		            	//inputDialog.setContentText(topicItem.getProperty());
 		            	Optional<String> result = inputDialog.showAndWait();
 		            	System.out.println(result);
 		            	if (result.isPresent()) {
 		            		//GridPane dPane = result.get();
 		            		String res = result.get();
 		            		System.out.println(res);
+		            		for (Node node : getChildren()) {
+		            		    if (node instanceof Label
+		            		    		&& getColumnIndex(node) == 1
+		            		    		&& getRowIndex(node) == topicItem.getPos()) {
+		            		    	((Label)node).setText(res);
+		            		    }
+		            		}
 		            	}
 		            }
 		        });
@@ -95,10 +140,7 @@ public class Gridpane extends Application {
 	            public void handle(ActionEvent e) {
 	                //actiontarget.setFill(Color.FIREBRICK);
 	                //actiontarget.setText("Sign in button pressed");
-	            	/*
-	            	final InputDialog inputDialog = new InputDialog("hhhhh");
-	            	inputDialog.show();
-	            	*/
+	            	
 	            	if (editingOn) {
 	            		btn.setText("Enable editing");
 	            		for (Button button : editButtonList) {
@@ -116,7 +158,7 @@ public class Gridpane extends Application {
 	        });
 		}
 	}
-	
+	*/
     public static void main(String[] args) {
         launch(args);
     }
@@ -127,7 +169,7 @@ public class Gridpane extends Application {
         primaryStage.setTitle("DSC_8964.jpg");
         TopicPane topic = new TopicPane();
         
-        topic.setImageName("DSC_8964.jpg");
+        topic.setImageName("p1030517_24721881802_o.jpg.jpg");
         topic.setTitle("Assets");
 
         topic.add("Sequence Id", "0002", false);

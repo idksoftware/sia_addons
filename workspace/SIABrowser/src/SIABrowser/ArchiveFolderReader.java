@@ -1,4 +1,4 @@
-package TreeView;
+package SIABrowser;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -16,6 +16,7 @@ public class ArchiveFolderReader {
 	}
 	
 	@SuppressWarnings("serial")
+	public
 	class YearList extends ListItem {
 	
 		public YearList() {
@@ -48,6 +49,7 @@ public class ArchiveFolderReader {
 	
 	
 	@SuppressWarnings("serial")
+	public
 	class DayList extends ListItem {
 		DayList(String year) {
 			File f = new File(root.toString() + File.separator + year);
@@ -60,18 +62,18 @@ public class ArchiveFolderReader {
 	YearList yearList;
 	Path root = null;
 	String currYear;
-	ArchiveFolderReader(String path) {
+	public ArchiveFolderReader(String path) {
 		this.root = Paths.get(path);
 		yearList = new YearList();
 	}
 	void resetYear() {
 		
 	}
-	YearList getYear() {
+	public YearList getYear() {
 		return yearList;
 	}
 	
-	DayList getDay(String year) {
+	public DayList getDay(String year) {
 		DayList dayList = new DayList(year);
 		return dayList; 
 	}
@@ -81,4 +83,3 @@ public class ArchiveFolderReader {
 		return imageList; 
 	}
 }
-
