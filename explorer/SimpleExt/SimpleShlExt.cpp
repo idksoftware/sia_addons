@@ -8,7 +8,7 @@
 #include "SimpleShlExt.h"
 
 #define APPNAME "notepad.exe"
-#define SYSTEM_OPTIONS "Software\\IDK Software\\SIA 1.0"
+#define SYSTEM_OPTIONS "Software\\IDK Software\\ImgArchive 1.0"
 
 
 
@@ -23,6 +23,10 @@ STDMETHODIMP CSimpleShlExt::Initialize (
 	STGMEDIUM stg = { TYMED_HGLOBAL };
 	HDROP     hDrop;
 
+	if (pDataObj == nullptr) {
+		m_cbFiles = 0;
+		return S_OK;
+	}
     // Look for CF_HDROP data in the data object.
     if ( FAILED( pDataObj->GetData ( &fmt, &stg ) ))
         {
@@ -121,9 +125,9 @@ STDMETHODIMP CSimpleShlExt::QueryContextMenu (
     UINT uID = uidFirstCmd;
 	if (m_cbFiles > 0) { // find where in the file system
 		DWORD dwReturnCode = _tsplitpath_s( m_FileList[0], tcDrive, _MAX_DRIVE, tcDir, _MAX_DIR, tcFname, _MAX_FNAME, tcExt, _MAX_EXT );
-		if (strcmp(tcExt, ".sia") == 0 && strlen(tcFname) == 0) {
+		if (strcmp(tcExt, ".imga") == 0 && strlen(tcFname) == 0) {
 			// selected the ".sia"
-			return MAKE_HRESULT ( SEVERITY_SUCCESS, FACILITY_NULL, 0 );
+			//return MAKE_HRESULT ( SEVERITY_SUCCESS, FACILITY_NULL, 0 );
 		}
 		if (m_cbFiles == 1) {
 			DWORD dwAttrib = GetFileAttributes(m_FileList[0]);
@@ -134,14 +138,14 @@ STDMETHODIMP CSimpleShlExt::QueryContextMenu (
 			}
 			if (m_isOneDir) {
 				// check if the root workspace
-				sprintf(tcPath, "%s\\.sia", m_FileList[0]);
+				sprintf(tcPath, "%s\\.imga", m_FileList[0]);
 				DWORD dwAttribSIA = GetFileAttributes(tcPath);
 				if (dwAttribSIA) {
 					m_isWorkspace = (dwAttribSIA != INVALID_FILE_ATTRIBUTES && (dwAttribSIA & FILE_ATTRIBUTE_DIRECTORY));
 				}
 			} else {
 				// one file which may be in the workspace
-				sprintf(tcPath, "%s%s\\.sia", tcDrive, tcDir);
+				sprintf(tcPath, "%s%s\\.imga", tcDrive, tcDir);
 				DWORD dwAttribSIA = GetFileAttributes(tcPath);
 				if (dwAttribSIA) {
 					m_isWorkspace = (dwAttribSIA != INVALID_FILE_ATTRIBUTES && (dwAttribSIA & FILE_ATTRIBUTE_DIRECTORY));
@@ -155,7 +159,7 @@ STDMETHODIMP CSimpleShlExt::QueryContextMenu (
 				return MAKE_HRESULT ( SEVERITY_SUCCESS, FACILITY_NULL, 0 );
 			}
 			
-			sprintf(tcPath, "%s%s.sia", tcDrive, tcDir);
+			sprintf(tcPath, "%s%s.imga", tcDrive, tcDir);
 			DWORD dwAttribSIA = GetFileAttributes(tcPath);
 			if (dwAttribSIA) {
 				m_isWorkspace = (dwAttribSIA != INVALID_FILE_ATTRIBUTES && (dwAttribSIA & FILE_ATTRIBUTE_DIRECTORY));
@@ -401,9 +405,9 @@ bool CSimpleShlExt::launch(const char *regKey) {
 		if (!lRet) // If the function succeeds, the return value is nonzero.
 		{
 				// If unsuccessfuly open the key
-			::MessageBox(0, __TEXT("Sorry? SIA Installation incomplete.\r")
-							__TEXT("Please re-install FtpCOPY.\r")
-							__TEXT("If the problem persists, please contact IDK Software Ltd."),
+			::MessageBox(0, __TEXT("Sorry? Image Archive Installation incomplete.\r")
+							__TEXT("Please re-install Image Archive.\r")
+							__TEXT("If the problem persists, please contact IDK Solutions Ltd."),
 				__TEXT("FtpCOPY"), MB_OK);
 			return S_OK;
 		}
@@ -420,6 +424,7 @@ bool CSimpleShlExt::launch(const char *regKey) {
 		time_t timeStamp;
 		time(&timeStamp);
 		itoa (timeStamp,buffer,10);
+
 		//lstrcpynA(l_TmpName, T2CA(szValue), 260 );
 		char *l_TmpFileStr = tmpnam(l_TmpName);
 		//AtlW2AHelper(buffer, szValue, pdwCount);
@@ -430,8 +435,8 @@ bool CSimpleShlExt::launch(const char *regKey) {
 		if (!m_pFileHandle)
 		{
 			// If unsuccessfuly found the temp directory
-			::MessageBox(0,__TEXT("SIA"),
-				__TEXT("SIA Unable to open file"), MB_OK);
+			::MessageBox(0,__TEXT("ImgArchive"),
+				__TEXT("ImgArchive Unable to open file"), MB_OK);
 			return S_OK;
 		}
 		int c = m_FileList.GetSize();
@@ -471,15 +476,15 @@ bool CSimpleShlExt::launch(const char *regKey) {
 		if (!lRet)
 		{
 				// If unsuccessfuly open the key
-			::MessageBox(0, __TEXT("Sorry? SIA Installation incomplete.\r")
+			::MessageBox(0, __TEXT("Sorry? ImgArchive Installation incomplete.\r")
 							__TEXT("Please re-install FtpCOPY.\r")
 							__TEXT("If the problem persists, please contact IDK Software Ltd."),
-				__TEXT("SIA"), MB_OK);
+				__TEXT("ImgArchive"), MB_OK);
 			return S_OK;
 		}
 		
 	} else {
-		::MessageBox (0,__TEXT("SIA"),__TEXT("Error"), MB_OK);
+		::MessageBox (0,__TEXT("ImgArchive"),__TEXT("Error"), MB_OK);
 	}
 	return true;
 }
@@ -503,8 +508,8 @@ bool CSimpleShlExt::GetRegValues(const char *currCmd) {
 	if (lRet != ERROR_SUCCESS)
 	{
 		// If unsuccessfuly open the key
-		::MessageBox(0, __TEXT("Sorry? SIA Installation incomplete.\r")
-						__TEXT("Please re-install SIA.\r")
+		::MessageBox(0, __TEXT("Sorry? ImgArchive Installation incomplete.\r")
+						__TEXT("Please re-install ImgArchive.\r")
 						__TEXT("If the problem persists, please contact IDK Software Ltd."),
 			__TEXT("Simple Image Archive"), MB_OK);
 		return true;
