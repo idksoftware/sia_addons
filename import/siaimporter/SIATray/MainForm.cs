@@ -64,7 +64,7 @@ namespace SIATray
         public static List<Form> ProcessList { get { return processList; } }
 
         
-        public static ImportQueueForm importQueueForm = null;
+        //public static ImportQueueForm importQueueForm = null;
         public MainForm()
         {
             InitializeComponent();
@@ -664,11 +664,11 @@ namespace SIATray
 
         private void importQueueToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (importQueueForm == null) {
-                importQueueForm = new ImportQueueForm();
-            }
-            importQueueForm.Show();
-            importQueueForm.WindowState = FormWindowState.Normal;
+            //if (importQueueForm == null) {
+            //    importQueueForm = new ImportQueueForm();
+            //}
+           // importQueueForm.Show();
+            //importQueueForm.WindowState = FormWindowState.Normal;
         }
     }
 }
