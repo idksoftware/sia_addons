@@ -8,6 +8,8 @@
 #include "atlstr.h"
 #include "MyOverlayIcon.h"
 
+#define SYSTEM_OPTIONS "Software\\IDK Software\\ImgArchive 1.0"
+
 void ShortFilename(TCHAR *pPath, TCHAR *fname)
 {
 	
@@ -86,12 +88,13 @@ STDMETHODIMP CMyOverlayIcon::IsMemberOf(LPCWSTR pwszPath, DWORD dwAttrib)
   DWORD dwReturnCode = _tsplitpath_s(pwszPath, tcDrive, _MAX_DRIVE, tcDir, _MAX_DIR, tcFname, _MAX_FNAME, tcExt, _MAX_EXT );
  
   // Criteria
-	wsprintf(tcPath, _T("%s%s\.sia"), tcDrive, tcDir);
+	wsprintf(tcPath, _T("%s%s\.imga"), tcDrive, tcDir);
 	DWORD dwAttribSIA = GetFileAttributes(tcPath);
 	isWorkspace = (dwAttribSIA != INVALID_FILE_ATTRIBUTES && (dwAttribSIA & FILE_ATTRIBUTE_DIRECTORY));
 	if (isWorkspace) {   
 		char buffer[_MAX_PATH + 1];
 		TCHAR   fullFname[_MAX_FNAME];
+		TCHAR   fullDataFileName[_MAX_FNAME];
 		wsprintf(fullFname, _T("%s%s"), tcFname, tcExt);
 		strcpy(buffer, T2A(tcPath));
 		readFile(buffer);
@@ -116,7 +119,7 @@ STDMETHODIMP CMyOverlayIcon::IsMemberOf(LPCWSTR pwszPath, DWORD dwAttrib)
 		*/
 	}
   free(s);
-
+  m_FileList.clear();
   return r;
 }
 
@@ -125,7 +128,7 @@ bool CMyOverlayIcon::readFile(const char *p) {
 	char path[1024];
 	char buffer[1024];
 	TCHAR szName [1024];
-	sprintf(path, "%s\\cout.dat", p);
+	sprintf(path, "%s\\chkout.dat", p);
 	std::ifstream fin(path);
   	if(fin.is_open())
 	{
@@ -137,5 +140,44 @@ bool CMyOverlayIcon::readFile(const char *p) {
 		}
 	}
 	fin.close();
+	return true;
+}
+
+bool CMyOverlayIcon::GetRegValues() {
+	CRegKey hKey;
+	long lRet;
+	//
+	//	Open the registery to extract the directory X:/Temp
+	//	and the path to DSDoorMan
+	//
+	lRet = hKey.Open(HKEY_CURRENT_USER,
+		_T(SYSTEM_OPTIONS));
+
+	TCHAR szValue[260];
+	LPCTSTR lpszValueName;
+	DWORD pdwCount;
+
+
+
+	if (lRet != ERROR_SUCCESS)
+	{
+		// If unsuccessfuly open the key
+		::MessageBox(0, __TEXT("Sorry? ImgArchive Installation incomplete.\r")
+			__TEXT("Please re-install ImgArchive.\r")
+			__TEXT("If the problem persists, please contact IDK Software Ltd."),
+			__TEXT("Simple Image Archive"), MB_OK);
+		return true;
+	}
+	
+	pdwCount = 260;
+	lRet = hKey.QueryValue(m_szWorkspacePath, __TEXT("WorkspacePath"), &pdwCount);
+	if (lRet != ERROR_SUCCESS)
+	{
+		// If unsuccessfuly found the temp directory
+		::MessageBox(0, __TEXT("Simple Image Archive"),
+			__TEXT("Simple Image Archive Installation incomplete"), MB_OK);
+		return false;
+	}
+
 	return true;
 }

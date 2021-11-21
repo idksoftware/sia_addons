@@ -63,6 +63,8 @@ private:
 	//CSimpleArray<TCHAR *> m_FileList;
 	std::vector<std::string> m_FileList;
 	bool readFile(const char *path);
+	bool GetRegValues();
+	TCHAR m_szWorkspacePath[MAX_PATH];
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(MyOverlayIcon), CMyOverlayIcon)

@@ -25,6 +25,7 @@ STDMETHODIMP CSimpleShlExt::Initialize (
 
 	if (pDataObj == nullptr) {
 		m_cbFiles = 0;
+		
 		return S_OK;
 	}
     // Look for CF_HDROP data in the data object.
@@ -477,7 +478,7 @@ bool CSimpleShlExt::launch(const char *regKey) {
 		{
 				// If unsuccessfuly open the key
 			::MessageBox(0, __TEXT("Sorry? ImgArchive Installation incomplete.\r")
-							__TEXT("Please re-install FtpCOPY.\r")
+							__TEXT("Please re-install ImgArchive.\r")
 							__TEXT("If the problem persists, please contact IDK Software Ltd."),
 				__TEXT("ImgArchive"), MB_OK);
 			return S_OK;
