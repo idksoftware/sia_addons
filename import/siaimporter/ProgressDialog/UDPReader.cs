@@ -12,7 +12,7 @@ namespace ProgressDialog
     {
         Thread _readThread;
         volatile bool _keepReading;
-        private const int listenPort = 64321;
+        private const int listenPort = 64322;
         //begin Singleton pattern
         static readonly UDPReader instance = new UDPReader();
         
